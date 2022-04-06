@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+
+        <div class="input-group" style="padding: 10px;">
+            <input type="text" class="form-control" placeholder="Search for..." #searchTerm>
+            <span class="input-group-btn">
+                <button class="btn btn-search" type="button" (click)="performSearch(searchTerm)"><i
+                        class="fa fa-search "></i> Search</button>
+            </span>
+        </div>
+
+    </div>
+    <br />
+    <div class="row image" *ngIf="giphies.length != 0">
+        <p>Images</p>
+    </div>
+
+    <div class="row align-items-center">
+        <div class="col" *ngFor="let g of giphies | paginate: config" style="padding: 10px;">
+            <img src="{{g.images.original.url}}" class="rounded float-left" alt=".." width="304" height="236">
+        </div>
+
+        <div class="col imgnotfound" *ngIf="giphies.length === 0">
+            <p>{{imageNotFound}}</p>
+        </div>
+
+    </div>
+
+    <div class="footer" *ngIf="giphies.length != 0">
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+    </div>
+
+</div>
